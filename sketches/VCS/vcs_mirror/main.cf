@@ -50,27 +50,6 @@ bundle agent mirror(prefix, class_prefix, vcs, path, origin, branch, runas, umas
       "canon_prefix" string => canonify("$(prefix)");
       "vcs_type" string => lastnode("$(vcs)","/");
 
-    !nowipe::
-      "git_update_command" slist =>
-      {
-        # Remove untracked files
-        "$(vcs) clean -f -f -x -q -d .",
-        # Discard changes to index and working tree since HEAD
-        "$(vcs) reset -q --hard HEAD",
-        # Check out the proper branch
-        "$(vcs) checkout -q $(branch)",
-        # Pull the latest changes from origin
-        "$(vcs) pull -q -s recursive -Xtheirs origin $(branch)",
-        # Reset the working tree to the latest updates
-        "$(vcs) reset -q --hard HEAD",
-      };
-
-    nowipe::
-      "git_update_command" slist =>
-      {
-        "$(vcs) pull origin $(branch)",
-      };
-
     variables_ok.path_exists::
       "git_mirror_command" slist =>
       {
@@ -90,6 +69,27 @@ bundle agent mirror(prefix, class_prefix, vcs, path, origin, branch, runas, umas
       };
 
    any::
+
+    #!nowipe::
+    #  "git_update_command" slist =>
+    #  {
+    #    # Remove untracked files
+    #    "$(vcs) clean -f -f -x -q -d .",
+    #    # Discard changes to index and working tree since HEAD
+    #    "$(vcs) reset -q --hard HEAD",
+    #    # Check out the proper branch
+    #    "$(vcs) checkout -q $(branch)",
+    #    # Pull the latest changes from origin
+    #    "$(vcs) pull -q -s recursive -Xtheirs origin $(branch)",
+    #    # Reset the working tree to the latest updates
+    #    "$(vcs) reset -q --hard HEAD",
+    #  };
+
+    #nowipe::
+      "git_update_command" slist =>
+      {
+        "$(vcs) pull origin $(branch)",
+      };
       "git_configfile" string => "$(path)/.git/config";
 
       "git_config_template" string => "

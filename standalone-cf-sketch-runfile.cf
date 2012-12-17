@@ -1,0 +1,133 @@
+            body common control
+{
+    bundlesequence => { "cfsketch_run" };
+    inputs => { @(cfsketch_g.inputs) };
+}
+
+
+        bundle common cfsketch_g
+{
+  classes:
+    # contexts
+           # contexts for activation 003
+      "_003_VCS__vcs_mirror_activated" expression => "any";
+      "_003_VCS__vcs_mirror_nowipe" expression => "any";
+       # contexts for activation 002
+      "_002_VCS__vcs_mirror_activated" expression => "any";
+      "_002_VCS__vcs_mirror_nowipe" expression => "any";
+       # contexts for activation 004
+      "_004_VCS__vcs_mirror_activated" expression => "any";
+      "_004_VCS__vcs_mirror_nowipe" expression => "any";
+       # contexts for activation 001
+      "_001_VCS__vcs_mirror_activated" expression => "any";
+      "_001_VCS__vcs_mirror_nowipe" expression => "any";
+
+      vars:
+        # Files that need to be loaded for this to work.
+        "inputs" slist => { "sketches/CFEngine/stdlib/cfengine_stdlib.cf", "sketches/VCS/vcs_mirror/main.cf" };
+
+           # string and slist variables for activation 003
+     any::
+       "_003_VCS__vcs_mirror_prefix" string => "cfsketch_g._003_VCS__vcs_mirror_";
+       "_003_VCS__vcs_mirror_class_prefix" string => "default:_003_VCS__vcs_mirror_";
+       "_003_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
+       "_003_VCS__vcs_mirror_path" string => "/etc/X11";
+       "_003_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-X11.git";
+       "_003_VCS__vcs_mirror_branch" string => "master";
+       "_003_VCS__vcs_mirror_runas" string => "root";
+       "_003_VCS__vcs_mirror_umask" string => "022";
+       "_003_VCS__vcs_mirror_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_003_VCS__vcs_mirror_contexts[nowipe]" string => "any"; # text representation of the context "nowipe"
+       "_003_VCS__vcs_mirror_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_003_VCS__vcs_mirror_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_003_VCS__vcs_mirror_sketch_tags" slist => { "cfdc" };
+       "_003_VCS__vcs_mirror_sketch_manifest" slist => { "README.md", "main.cf", "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_003_VCS__vcs_mirror_sketch_manifest_cf" slist => { "main.cf" };
+       "_003_VCS__vcs_mirror_sketch_manifest_docs" slist => { "README.md" };
+       "_003_VCS__vcs_mirror_sketch_manifest_extra" slist => { "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_003_VCS__vcs_mirror_sketch_version" string => "1.11";
+       "_003_VCS__vcs_mirror_sketch_name" string => "VCS::vcs_mirror";
+       "_003_VCS__vcs_mirror_sketch_license" string => "MIT";
+       # string and slist variables for activation 002
+     any::
+       "_002_VCS__vcs_mirror_prefix" string => "cfsketch_g._002_VCS__vcs_mirror_";
+       "_002_VCS__vcs_mirror_class_prefix" string => "default:_002_VCS__vcs_mirror_";
+       "_002_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
+       "_002_VCS__vcs_mirror_path" string => "/var/cfengine/masterfiles";
+       "_002_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream.git";
+       "_002_VCS__vcs_mirror_branch" string => "master";
+       "_002_VCS__vcs_mirror_runas" string => "root";
+       "_002_VCS__vcs_mirror_umask" string => "022";
+       "_002_VCS__vcs_mirror_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_002_VCS__vcs_mirror_contexts[nowipe]" string => "any"; # text representation of the context "nowipe"
+       "_002_VCS__vcs_mirror_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_002_VCS__vcs_mirror_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_002_VCS__vcs_mirror_sketch_tags" slist => { "cfdc" };
+       "_002_VCS__vcs_mirror_sketch_manifest" slist => { "README.md", "main.cf", "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_002_VCS__vcs_mirror_sketch_manifest_cf" slist => { "main.cf" };
+       "_002_VCS__vcs_mirror_sketch_manifest_docs" slist => { "README.md" };
+       "_002_VCS__vcs_mirror_sketch_manifest_extra" slist => { "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_002_VCS__vcs_mirror_sketch_version" string => "1.11";
+       "_002_VCS__vcs_mirror_sketch_name" string => "VCS::vcs_mirror";
+       "_002_VCS__vcs_mirror_sketch_license" string => "MIT";
+       # string and slist variables for activation 004
+     any::
+       "_004_VCS__vcs_mirror_prefix" string => "cfsketch_g._004_VCS__vcs_mirror_";
+       "_004_VCS__vcs_mirror_class_prefix" string => "default:_004_VCS__vcs_mirror_";
+       "_004_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
+       "_004_VCS__vcs_mirror_path" string => "/etc/portage";
+       "_004_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-portage.git";
+       "_004_VCS__vcs_mirror_branch" string => "master";
+       "_004_VCS__vcs_mirror_runas" string => "root";
+       "_004_VCS__vcs_mirror_umask" string => "022";
+       "_004_VCS__vcs_mirror_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_004_VCS__vcs_mirror_contexts[nowipe]" string => "any"; # text representation of the context "nowipe"
+       "_004_VCS__vcs_mirror_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_004_VCS__vcs_mirror_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_004_VCS__vcs_mirror_sketch_tags" slist => { "cfdc" };
+       "_004_VCS__vcs_mirror_sketch_manifest" slist => { "README.md", "main.cf", "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_004_VCS__vcs_mirror_sketch_manifest_cf" slist => { "main.cf" };
+       "_004_VCS__vcs_mirror_sketch_manifest_docs" slist => { "README.md" };
+       "_004_VCS__vcs_mirror_sketch_manifest_extra" slist => { "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_004_VCS__vcs_mirror_sketch_version" string => "1.11";
+       "_004_VCS__vcs_mirror_sketch_name" string => "VCS::vcs_mirror";
+       "_004_VCS__vcs_mirror_sketch_license" string => "MIT";
+       # string and slist variables for activation 001
+     any::
+       "_001_VCS__vcs_mirror_prefix" string => "cfsketch_g._001_VCS__vcs_mirror_";
+       "_001_VCS__vcs_mirror_class_prefix" string => "default:_001_VCS__vcs_mirror_";
+       "_001_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
+       "_001_VCS__vcs_mirror_path" string => "/etc/conf.d";
+       "_001_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-conf.d.git";
+       "_001_VCS__vcs_mirror_branch" string => "master";
+       "_001_VCS__vcs_mirror_runas" string => "root";
+       "_001_VCS__vcs_mirror_umask" string => "022";
+       "_001_VCS__vcs_mirror_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_001_VCS__vcs_mirror_contexts[nowipe]" string => "any"; # text representation of the context "nowipe"
+       "_001_VCS__vcs_mirror_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_001_VCS__vcs_mirror_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_001_VCS__vcs_mirror_sketch_tags" slist => { "cfdc" };
+       "_001_VCS__vcs_mirror_sketch_manifest" slist => { "README.md", "main.cf", "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_001_VCS__vcs_mirror_sketch_manifest_cf" slist => { "main.cf" };
+       "_001_VCS__vcs_mirror_sketch_manifest_docs" slist => { "README.md" };
+       "_001_VCS__vcs_mirror_sketch_manifest_extra" slist => { "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
+       "_001_VCS__vcs_mirror_sketch_version" string => "1.11";
+       "_001_VCS__vcs_mirror_sketch_name" string => "VCS::vcs_mirror";
+       "_001_VCS__vcs_mirror_sketch_license" string => "MIT";
+
+}
+
+bundle agent cfsketch_run
+{
+  methods:
+    "cfsketch_g" usebundle => "cfsketch_g";
+        _003_VCS__vcs_mirror_activated::
+      "003 VCS::vcs_mirror 3" usebundle => cfdc_vcs:mirror($(cfsketch_g._003_VCS__vcs_mirror_prefix), $(cfsketch_g._003_VCS__vcs_mirror_class_prefix), $(cfsketch_g._003_VCS__vcs_mirror_vcs), $(cfsketch_g._003_VCS__vcs_mirror_path), $(cfsketch_g._003_VCS__vcs_mirror_origin), $(cfsketch_g._003_VCS__vcs_mirror_branch), $(cfsketch_g._003_VCS__vcs_mirror_runas), $(cfsketch_g._003_VCS__vcs_mirror_umask));
+    _002_VCS__vcs_mirror_activated::
+      "002 VCS::vcs_mirror 2" usebundle => cfdc_vcs:mirror($(cfsketch_g._002_VCS__vcs_mirror_prefix), $(cfsketch_g._002_VCS__vcs_mirror_class_prefix), $(cfsketch_g._002_VCS__vcs_mirror_vcs), $(cfsketch_g._002_VCS__vcs_mirror_path), $(cfsketch_g._002_VCS__vcs_mirror_origin), $(cfsketch_g._002_VCS__vcs_mirror_branch), $(cfsketch_g._002_VCS__vcs_mirror_runas), $(cfsketch_g._002_VCS__vcs_mirror_umask));
+    _004_VCS__vcs_mirror_activated::
+      "004 VCS::vcs_mirror 4" usebundle => cfdc_vcs:mirror($(cfsketch_g._004_VCS__vcs_mirror_prefix), $(cfsketch_g._004_VCS__vcs_mirror_class_prefix), $(cfsketch_g._004_VCS__vcs_mirror_vcs), $(cfsketch_g._004_VCS__vcs_mirror_path), $(cfsketch_g._004_VCS__vcs_mirror_origin), $(cfsketch_g._004_VCS__vcs_mirror_branch), $(cfsketch_g._004_VCS__vcs_mirror_runas), $(cfsketch_g._004_VCS__vcs_mirror_umask));
+    _001_VCS__vcs_mirror_activated::
+      "001 VCS::vcs_mirror 1" usebundle => cfdc_vcs:mirror($(cfsketch_g._001_VCS__vcs_mirror_prefix), $(cfsketch_g._001_VCS__vcs_mirror_class_prefix), $(cfsketch_g._001_VCS__vcs_mirror_vcs), $(cfsketch_g._001_VCS__vcs_mirror_path), $(cfsketch_g._001_VCS__vcs_mirror_origin), $(cfsketch_g._001_VCS__vcs_mirror_branch), $(cfsketch_g._001_VCS__vcs_mirror_runas), $(cfsketch_g._001_VCS__vcs_mirror_umask));
+
+}
