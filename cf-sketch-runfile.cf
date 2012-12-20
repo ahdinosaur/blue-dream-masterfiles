@@ -8,10 +8,10 @@
       "_011_VCS__vcs_mirror_activated" expression => "any";
       "_011_VCS__vcs_mirror_nowipe" expression => "any";
        # contexts for activation 002
-      "_002_System__openrc_activated" expression => "any";
+      "_002_System__etc_hosts_activated" expression => "any";
+      "_002_System__etc_hosts_defined_only" expression => "any";
        # contexts for activation 010
-      "_010_VCS__vcs_mirror_activated" expression => "any";
-      "_010_VCS__vcs_mirror_nowipe" expression => "any";
+      "_010_System__tzconfig_activated" expression => "any";
        # contexts for activation 004
       "_004_System__openrc_activated" expression => "any";
        # contexts for activation 013
@@ -20,9 +20,9 @@
        # contexts for activation 005
       "_005_System__openrc_activated" expression => "any";
        # contexts for activation 008
-      "_008_System__set_hostname_activated" expression => "any";
+      "_008_System__openrc_activated" expression => "any";
        # contexts for activation 009
-      "_009_System__tzconfig_activated" expression => "any";
+      "_009_System__set_hostname_activated" expression => "any";
        # contexts for activation 003
       "_003_System__openrc_activated" expression => "any";
        # contexts for activation 006
@@ -36,23 +36,22 @@
       "_015_VCS__vcs_mirror_activated" expression => "any";
       "_015_VCS__vcs_mirror_nowipe" expression => "any";
        # contexts for activation 001
-      "_001_System__etc_hosts_activated" expression => "any";
-      "_001_System__etc_hosts_defined_only" expression => "any";
+      "_001_Packages__Generic__add_activated" expression => "any";
        # contexts for activation 012
       "_012_VCS__vcs_mirror_activated" expression => "any";
       "_012_VCS__vcs_mirror_nowipe" expression => "any";
 
       vars:
         # Files that need to be loaded for this to work.
-        "inputs" slist => { "sketches/CFEngine/stdlib/cfengine_stdlib.cf", "sketches/System/etc_hosts/main.cf", "sketches/System/openrc/main.cf", "sketches/System/set_hostname/main.cf", "sketches/System/tzconfig/main.cf", "sketches/VCS/vcs_mirror/main.cf" };
+        "inputs" slist => { "sketches/CFEngine/stdlib/cfengine_stdlib.cf", "sketches/Packages/Generic/add/main.cf", "sketches/System/etc_hosts/main.cf", "sketches/System/openrc/main.cf", "sketches/System/set_hostname/main.cf", "sketches/System/tzconfig/main.cf", "sketches/VCS/vcs_mirror/main.cf" };
 
            # string and slist variables for activation 011
      any::
        "_011_VCS__vcs_mirror_prefix" string => "cfsketch_g._011_VCS__vcs_mirror_";
        "_011_VCS__vcs_mirror_class_prefix" string => "default:_011_VCS__vcs_mirror_";
        "_011_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
-       "_011_VCS__vcs_mirror_path" string => "/etc/conf.d";
-       "_011_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-conf.d.git";
+       "_011_VCS__vcs_mirror_path" string => "/usr/src/linux";
+       "_011_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-linux.git";
        "_011_VCS__vcs_mirror_branch" string => "master";
        "_011_VCS__vcs_mirror_runas" string => "root";
        "_011_VCS__vcs_mirror_umask" string => "022";
@@ -70,48 +69,46 @@
        "_011_VCS__vcs_mirror_sketch_license" string => "MIT";
        # string and slist variables for activation 002
      any::
-       "_002_System__openrc_prefix" string => "cfsketch_g._002_System__openrc_";
-       "_002_System__openrc_class_prefix" string => "default:_002_System__openrc_";
-       "_002_System__openrc_service" string => "cf-execd";
-       "_002_System__openrc_runlevel" string => "default";
-       "_002_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
-       "_002_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
-       "_002_System__openrc_sketch_authors" slist => { "Michael Williams <dinosaur@riseup.net>" };
-       "_002_System__openrc_sketch_tags" slist => { "cfdc" };
-       "_002_System__openrc_sketch_manifest" slist => { "README.md", "main.cf", "params/demo.json" };
-       "_002_System__openrc_sketch_manifest_cf" slist => { "main.cf" };
-       "_002_System__openrc_sketch_manifest_docs" slist => { "README.md" };
-       "_002_System__openrc_sketch_manifest_extra" slist => { "params/demo.json" };
-       "_002_System__openrc_sketch_version" string => "0.01";
-       "_002_System__openrc_sketch_name" string => "System::openrc";
-       "_002_System__openrc_sketch_license" string => "MIT";
+       "_002_System__etc_hosts_class_prefix" string => "default:_002_System__etc_hosts_";
+       "_002_System__etc_hosts_hostfile" string => "/etc/hosts";
+       "_002_System__etc_hosts_hosts[192.168.42.1]" string => "banana-kush banana-kush.emerald-triangle";
+       "_002_System__etc_hosts_hosts[192.168.42.150]" string => "beagle beagle.emerald-triangle";
+       "_002_System__etc_hosts_hosts[192.168.42.2]" string => "pineapple-express pineapple-express.emerald-triangle";
+       "_002_System__etc_hosts_hosts[192.168.42.3]" string => "blue-dream blue-dream.emerald-triangle";
+       "_002_System__etc_hosts_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_002_System__etc_hosts_contexts[defined_only]" string => "any"; # text representation of the context "defined_only"
+       "_002_System__etc_hosts_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_002_System__etc_hosts_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_002_System__etc_hosts_sketch_tags" slist => { "cfdc" };
+       "_002_System__etc_hosts_sketch_manifest" slist => { "README.md", "main.cf", "params/example.json" };
+       "_002_System__etc_hosts_sketch_manifest_cf" slist => { "main.cf" };
+       "_002_System__etc_hosts_sketch_manifest_docs" slist => { "README.md" };
+       "_002_System__etc_hosts_sketch_manifest_extra" slist => { "params/example.json" };
+       "_002_System__etc_hosts_sketch_version" string => "2.1";
+       "_002_System__etc_hosts_sketch_name" string => "System::etc_hosts";
+       "_002_System__etc_hosts_sketch_license" string => "MIT";
        # string and slist variables for activation 010
      any::
-       "_010_VCS__vcs_mirror_prefix" string => "cfsketch_g._010_VCS__vcs_mirror_";
-       "_010_VCS__vcs_mirror_class_prefix" string => "default:_010_VCS__vcs_mirror_";
-       "_010_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
-       "_010_VCS__vcs_mirror_path" string => "/usr/src/linux";
-       "_010_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-linux.git";
-       "_010_VCS__vcs_mirror_branch" string => "master";
-       "_010_VCS__vcs_mirror_runas" string => "root";
-       "_010_VCS__vcs_mirror_umask" string => "022";
-       "_010_VCS__vcs_mirror_contexts[activated]" string => "any"; # text representation of the context "activated"
-       "_010_VCS__vcs_mirror_contexts[nowipe]" string => "any"; # text representation of the context "nowipe"
-       "_010_VCS__vcs_mirror_sketch_depends" slist => { "CFEngine::stdlib" };
-       "_010_VCS__vcs_mirror_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
-       "_010_VCS__vcs_mirror_sketch_tags" slist => { "cfdc" };
-       "_010_VCS__vcs_mirror_sketch_manifest" slist => { "README.md", "main.cf", "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
-       "_010_VCS__vcs_mirror_sketch_manifest_cf" slist => { "main.cf" };
-       "_010_VCS__vcs_mirror_sketch_manifest_docs" slist => { "README.md" };
-       "_010_VCS__vcs_mirror_sketch_manifest_extra" slist => { "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
-       "_010_VCS__vcs_mirror_sketch_version" string => "1.11";
-       "_010_VCS__vcs_mirror_sketch_name" string => "VCS::vcs_mirror";
-       "_010_VCS__vcs_mirror_sketch_license" string => "MIT";
+       "_010_System__tzconfig_canon_prefix" string => "_010_System__tzconfig_";
+       "_010_System__tzconfig_timezone" string => "America/Los_Angeles";
+       "_010_System__tzconfig_zoneinfo" string => "/usr/share/zoneinfo";
+       "_010_System__tzconfig_relocate" string => "/";
+       "_010_System__tzconfig_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_010_System__tzconfig_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_010_System__tzconfig_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_010_System__tzconfig_sketch_tags" slist => { "cfdc" };
+       "_010_System__tzconfig_sketch_manifest" slist => { "README.md", "main.cf", "params/US_Central.json" };
+       "_010_System__tzconfig_sketch_manifest_cf" slist => { "main.cf" };
+       "_010_System__tzconfig_sketch_manifest_docs" slist => { "README.md" };
+       "_010_System__tzconfig_sketch_manifest_extra" slist => { "params/US_Central.json" };
+       "_010_System__tzconfig_sketch_version" string => "1.2";
+       "_010_System__tzconfig_sketch_name" string => "System::tzconfig";
+       "_010_System__tzconfig_sketch_license" string => "MIT";
        # string and slist variables for activation 004
      any::
        "_004_System__openrc_prefix" string => "cfsketch_g._004_System__openrc_";
        "_004_System__openrc_class_prefix" string => "default:_004_System__openrc_";
-       "_004_System__openrc_service" string => "vixie-cron";
+       "_004_System__openrc_service" string => "xdm";
        "_004_System__openrc_runlevel" string => "default";
        "_004_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
        "_004_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
@@ -150,7 +147,7 @@
      any::
        "_005_System__openrc_prefix" string => "cfsketch_g._005_System__openrc_";
        "_005_System__openrc_class_prefix" string => "default:_005_System__openrc_";
-       "_005_System__openrc_service" string => "dhcpcd";
+       "_005_System__openrc_service" string => "vixie-cron";
        "_005_System__openrc_runlevel" string => "default";
        "_005_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
        "_005_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
@@ -165,42 +162,42 @@
        "_005_System__openrc_sketch_license" string => "MIT";
        # string and slist variables for activation 008
      any::
-       "_008_System__set_hostname_canon_prefix" string => "_008_System__set_hostname_";
-       "_008_System__set_hostname_hostname" string => "blue-dream";
-       "_008_System__set_hostname_domainname" string => "emerald-triangle";
-       "_008_System__set_hostname_contexts[activated]" string => "any"; # text representation of the context "activated"
-       "_008_System__set_hostname_sketch_depends" slist => { "CFEngine::stdlib" };
-       "_008_System__set_hostname_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
-       "_008_System__set_hostname_sketch_tags" slist => { "cfdc" };
-       "_008_System__set_hostname_sketch_manifest" slist => { "README.md", "changelog", "main.cf", "params/example.json", "test.cf" };
-       "_008_System__set_hostname_sketch_manifest_cf" slist => { "main.cf", "test.cf" };
-       "_008_System__set_hostname_sketch_manifest_docs" slist => { "README.md" };
-       "_008_System__set_hostname_sketch_manifest_extra" slist => { "changelog", "params/example.json" };
-       "_008_System__set_hostname_sketch_version" string => "1.05";
-       "_008_System__set_hostname_sketch_name" string => "System::set_hostname";
-       "_008_System__set_hostname_sketch_license" string => "MIT";
+       "_008_System__openrc_prefix" string => "cfsketch_g._008_System__openrc_";
+       "_008_System__openrc_class_prefix" string => "default:_008_System__openrc_";
+       "_008_System__openrc_service" string => "syslog-ng";
+       "_008_System__openrc_runlevel" string => "default";
+       "_008_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_008_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_008_System__openrc_sketch_authors" slist => { "Michael Williams <dinosaur@riseup.net>" };
+       "_008_System__openrc_sketch_tags" slist => { "cfdc" };
+       "_008_System__openrc_sketch_manifest" slist => { "README.md", "main.cf", "params/demo.json" };
+       "_008_System__openrc_sketch_manifest_cf" slist => { "main.cf" };
+       "_008_System__openrc_sketch_manifest_docs" slist => { "README.md" };
+       "_008_System__openrc_sketch_manifest_extra" slist => { "params/demo.json" };
+       "_008_System__openrc_sketch_version" string => "0.01";
+       "_008_System__openrc_sketch_name" string => "System::openrc";
+       "_008_System__openrc_sketch_license" string => "MIT";
        # string and slist variables for activation 009
      any::
-       "_009_System__tzconfig_canon_prefix" string => "_009_System__tzconfig_";
-       "_009_System__tzconfig_timezone" string => "America/Los_Angeles";
-       "_009_System__tzconfig_zoneinfo" string => "/usr/share/zoneinfo";
-       "_009_System__tzconfig_relocate" string => "/";
-       "_009_System__tzconfig_contexts[activated]" string => "any"; # text representation of the context "activated"
-       "_009_System__tzconfig_sketch_depends" slist => { "CFEngine::stdlib" };
-       "_009_System__tzconfig_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
-       "_009_System__tzconfig_sketch_tags" slist => { "cfdc" };
-       "_009_System__tzconfig_sketch_manifest" slist => { "README.md", "main.cf", "params/US_Central.json" };
-       "_009_System__tzconfig_sketch_manifest_cf" slist => { "main.cf" };
-       "_009_System__tzconfig_sketch_manifest_docs" slist => { "README.md" };
-       "_009_System__tzconfig_sketch_manifest_extra" slist => { "params/US_Central.json" };
-       "_009_System__tzconfig_sketch_version" string => "1.2";
-       "_009_System__tzconfig_sketch_name" string => "System::tzconfig";
-       "_009_System__tzconfig_sketch_license" string => "MIT";
+       "_009_System__set_hostname_canon_prefix" string => "_009_System__set_hostname_";
+       "_009_System__set_hostname_hostname" string => "blue-dream";
+       "_009_System__set_hostname_domainname" string => "emerald-triangle";
+       "_009_System__set_hostname_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_009_System__set_hostname_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_009_System__set_hostname_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
+       "_009_System__set_hostname_sketch_tags" slist => { "cfdc" };
+       "_009_System__set_hostname_sketch_manifest" slist => { "README.md", "changelog", "main.cf", "params/example.json", "test.cf" };
+       "_009_System__set_hostname_sketch_manifest_cf" slist => { "main.cf", "test.cf" };
+       "_009_System__set_hostname_sketch_manifest_docs" slist => { "README.md" };
+       "_009_System__set_hostname_sketch_manifest_extra" slist => { "changelog", "params/example.json" };
+       "_009_System__set_hostname_sketch_version" string => "1.05";
+       "_009_System__set_hostname_sketch_name" string => "System::set_hostname";
+       "_009_System__set_hostname_sketch_license" string => "MIT";
        # string and slist variables for activation 003
      any::
        "_003_System__openrc_prefix" string => "cfsketch_g._003_System__openrc_";
        "_003_System__openrc_class_prefix" string => "default:_003_System__openrc_";
-       "_003_System__openrc_service" string => "xdm";
+       "_003_System__openrc_service" string => "cf-execd";
        "_003_System__openrc_runlevel" string => "default";
        "_003_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
        "_003_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
@@ -217,7 +214,7 @@
      any::
        "_006_System__openrc_prefix" string => "cfsketch_g._006_System__openrc_";
        "_006_System__openrc_class_prefix" string => "default:_006_System__openrc_";
-       "_006_System__openrc_service" string => "sshd";
+       "_006_System__openrc_service" string => "dhcpcd";
        "_006_System__openrc_runlevel" string => "default";
        "_006_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
        "_006_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
@@ -234,7 +231,7 @@
      any::
        "_007_System__openrc_prefix" string => "cfsketch_g._007_System__openrc_";
        "_007_System__openrc_class_prefix" string => "default:_007_System__openrc_";
-       "_007_System__openrc_service" string => "syslog-ng";
+       "_007_System__openrc_service" string => "sshd";
        "_007_System__openrc_runlevel" string => "default";
        "_007_System__openrc_contexts[activated]" string => "any"; # text representation of the context "activated"
        "_007_System__openrc_sketch_depends" slist => { "CFEngine::stdlib" };
@@ -293,31 +290,27 @@
        "_015_VCS__vcs_mirror_sketch_license" string => "MIT";
        # string and slist variables for activation 001
      any::
-       "_001_System__etc_hosts_class_prefix" string => "default:_001_System__etc_hosts_";
-       "_001_System__etc_hosts_hostfile" string => "/etc/hosts";
-       "_001_System__etc_hosts_hosts[192.168.42.1]" string => "banana-kush banana-kush.emerald-triangle";
-       "_001_System__etc_hosts_hosts[192.168.42.150]" string => "beagle beagle.emerald-triangle";
-       "_001_System__etc_hosts_hosts[192.168.42.2]" string => "pineapple-express pineapple-express.emerald-triangle";
-       "_001_System__etc_hosts_hosts[192.168.42.3]" string => "blue-dream blue-dream.emerald-triangle";
-       "_001_System__etc_hosts_contexts[activated]" string => "any"; # text representation of the context "activated"
-       "_001_System__etc_hosts_contexts[defined_only]" string => "any"; # text representation of the context "defined_only"
-       "_001_System__etc_hosts_sketch_depends" slist => { "CFEngine::stdlib" };
-       "_001_System__etc_hosts_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
-       "_001_System__etc_hosts_sketch_tags" slist => { "cfdc" };
-       "_001_System__etc_hosts_sketch_manifest" slist => { "README.md", "main.cf", "params/example.json" };
-       "_001_System__etc_hosts_sketch_manifest_cf" slist => { "main.cf" };
-       "_001_System__etc_hosts_sketch_manifest_docs" slist => { "README.md" };
-       "_001_System__etc_hosts_sketch_manifest_extra" slist => { "params/example.json" };
-       "_001_System__etc_hosts_sketch_version" string => "2.1";
-       "_001_System__etc_hosts_sketch_name" string => "System::etc_hosts";
-       "_001_System__etc_hosts_sketch_license" string => "MIT";
+       "_001_Packages__Generic__add_prefix" string => "cfsketch_g._001_Packages__Generic__add_";
+       "_001_Packages__Generic__add_class_prefix" string => "default:_001_Packages__Generic__add_";
+       "_001_Packages__Generic__add_packages" slist => { "app-misc/mc" };
+       "_001_Packages__Generic__add_contexts[activated]" string => "any"; # text representation of the context "activated"
+       "_001_Packages__Generic__add_sketch_depends" slist => { "CFEngine::stdlib" };
+       "_001_Packages__Generic__add_sketch_authors" slist => { "Michael Williams <dinosaur@riseup.net>" };
+       "_001_Packages__Generic__add_sketch_tags" slist => { "cfdc" };
+       "_001_Packages__Generic__add_sketch_manifest" slist => { "README.md", "main.cf", "params/demo.json" };
+       "_001_Packages__Generic__add_sketch_manifest_cf" slist => { "main.cf" };
+       "_001_Packages__Generic__add_sketch_manifest_docs" slist => { "README.md" };
+       "_001_Packages__Generic__add_sketch_manifest_extra" slist => { "params/demo.json" };
+       "_001_Packages__Generic__add_sketch_version" string => "1";
+       "_001_Packages__Generic__add_sketch_name" string => "Packages::Generic::add";
+       "_001_Packages__Generic__add_sketch_license" string => "MIT";
        # string and slist variables for activation 012
      any::
        "_012_VCS__vcs_mirror_prefix" string => "cfsketch_g._012_VCS__vcs_mirror_";
        "_012_VCS__vcs_mirror_class_prefix" string => "default:_012_VCS__vcs_mirror_";
        "_012_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
-       "_012_VCS__vcs_mirror_path" string => "/var/cfengine/masterfiles";
-       "_012_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream.git";
+       "_012_VCS__vcs_mirror_path" string => "/etc/conf.d";
+       "_012_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-conf.d.git";
        "_012_VCS__vcs_mirror_branch" string => "master";
        "_012_VCS__vcs_mirror_runas" string => "root";
        "_012_VCS__vcs_mirror_umask" string => "022";
@@ -341,34 +334,34 @@ bundle agent cfsketch_run
   methods:
     "cfsketch_g" usebundle => "cfsketch_g";
         _011_VCS__vcs_mirror_activated::
-      "011 VCS::vcs_mirror 2" usebundle => cfdc_vcs:mirror($(cfsketch_g._011_VCS__vcs_mirror_prefix), $(cfsketch_g._011_VCS__vcs_mirror_class_prefix), $(cfsketch_g._011_VCS__vcs_mirror_vcs), $(cfsketch_g._011_VCS__vcs_mirror_path), $(cfsketch_g._011_VCS__vcs_mirror_origin), $(cfsketch_g._011_VCS__vcs_mirror_branch), $(cfsketch_g._011_VCS__vcs_mirror_runas), $(cfsketch_g._011_VCS__vcs_mirror_umask));
-    _002_System__openrc_activated::
-      "002 System::openrc 1" usebundle => cfdc_openrc:entry($(cfsketch_g._002_System__openrc_prefix), $(cfsketch_g._002_System__openrc_class_prefix), $(cfsketch_g._002_System__openrc_service), $(cfsketch_g._002_System__openrc_runlevel));
-    _010_VCS__vcs_mirror_activated::
-      "010 VCS::vcs_mirror 1" usebundle => cfdc_vcs:mirror($(cfsketch_g._010_VCS__vcs_mirror_prefix), $(cfsketch_g._010_VCS__vcs_mirror_class_prefix), $(cfsketch_g._010_VCS__vcs_mirror_vcs), $(cfsketch_g._010_VCS__vcs_mirror_path), $(cfsketch_g._010_VCS__vcs_mirror_origin), $(cfsketch_g._010_VCS__vcs_mirror_branch), $(cfsketch_g._010_VCS__vcs_mirror_runas), $(cfsketch_g._010_VCS__vcs_mirror_umask));
+      "011 VCS::vcs_mirror 1" usebundle => cfdc_vcs:mirror($(cfsketch_g._011_VCS__vcs_mirror_prefix), $(cfsketch_g._011_VCS__vcs_mirror_class_prefix), $(cfsketch_g._011_VCS__vcs_mirror_vcs), $(cfsketch_g._011_VCS__vcs_mirror_path), $(cfsketch_g._011_VCS__vcs_mirror_origin), $(cfsketch_g._011_VCS__vcs_mirror_branch), $(cfsketch_g._011_VCS__vcs_mirror_runas), $(cfsketch_g._011_VCS__vcs_mirror_umask));
+    _002_System__etc_hosts_activated::
+      "002 System::etc_hosts 1" usebundle => cfdc_etc_hosts:configure($(cfsketch_g._002_System__etc_hosts_class_prefix), $(cfsketch_g._002_System__etc_hosts_hostfile), "default:cfsketch_g._002_System__etc_hosts_hosts");
+    _010_System__tzconfig_activated::
+      "010 System::tzconfig 1" usebundle => cfdc_tzconfig:set($(cfsketch_g._010_System__tzconfig_canon_prefix), $(cfsketch_g._010_System__tzconfig_timezone), $(cfsketch_g._010_System__tzconfig_zoneinfo), $(cfsketch_g._010_System__tzconfig_relocate));
     _004_System__openrc_activated::
-      "004 System::openrc 3" usebundle => cfdc_openrc:entry($(cfsketch_g._004_System__openrc_prefix), $(cfsketch_g._004_System__openrc_class_prefix), $(cfsketch_g._004_System__openrc_service), $(cfsketch_g._004_System__openrc_runlevel));
+      "004 System::openrc 2" usebundle => cfdc_openrc:entry($(cfsketch_g._004_System__openrc_prefix), $(cfsketch_g._004_System__openrc_class_prefix), $(cfsketch_g._004_System__openrc_service), $(cfsketch_g._004_System__openrc_runlevel));
     _013_VCS__vcs_mirror_activated::
-      "013 VCS::vcs_mirror 4" usebundle => cfdc_vcs:mirror($(cfsketch_g._013_VCS__vcs_mirror_prefix), $(cfsketch_g._013_VCS__vcs_mirror_class_prefix), $(cfsketch_g._013_VCS__vcs_mirror_vcs), $(cfsketch_g._013_VCS__vcs_mirror_path), $(cfsketch_g._013_VCS__vcs_mirror_origin), $(cfsketch_g._013_VCS__vcs_mirror_branch), $(cfsketch_g._013_VCS__vcs_mirror_runas), $(cfsketch_g._013_VCS__vcs_mirror_umask));
+      "013 VCS::vcs_mirror 3" usebundle => cfdc_vcs:mirror($(cfsketch_g._013_VCS__vcs_mirror_prefix), $(cfsketch_g._013_VCS__vcs_mirror_class_prefix), $(cfsketch_g._013_VCS__vcs_mirror_vcs), $(cfsketch_g._013_VCS__vcs_mirror_path), $(cfsketch_g._013_VCS__vcs_mirror_origin), $(cfsketch_g._013_VCS__vcs_mirror_branch), $(cfsketch_g._013_VCS__vcs_mirror_runas), $(cfsketch_g._013_VCS__vcs_mirror_umask));
     _005_System__openrc_activated::
-      "005 System::openrc 4" usebundle => cfdc_openrc:entry($(cfsketch_g._005_System__openrc_prefix), $(cfsketch_g._005_System__openrc_class_prefix), $(cfsketch_g._005_System__openrc_service), $(cfsketch_g._005_System__openrc_runlevel));
-    _008_System__set_hostname_activated::
-      "008 System::set_hostname 1" usebundle => cfdc_hostname:set($(cfsketch_g._008_System__set_hostname_canon_prefix), $(cfsketch_g._008_System__set_hostname_hostname), $(cfsketch_g._008_System__set_hostname_domainname));
-    _009_System__tzconfig_activated::
-      "009 System::tzconfig 1" usebundle => cfdc_tzconfig:set($(cfsketch_g._009_System__tzconfig_canon_prefix), $(cfsketch_g._009_System__tzconfig_timezone), $(cfsketch_g._009_System__tzconfig_zoneinfo), $(cfsketch_g._009_System__tzconfig_relocate));
+      "005 System::openrc 3" usebundle => cfdc_openrc:entry($(cfsketch_g._005_System__openrc_prefix), $(cfsketch_g._005_System__openrc_class_prefix), $(cfsketch_g._005_System__openrc_service), $(cfsketch_g._005_System__openrc_runlevel));
+    _008_System__openrc_activated::
+      "008 System::openrc 6" usebundle => cfdc_openrc:entry($(cfsketch_g._008_System__openrc_prefix), $(cfsketch_g._008_System__openrc_class_prefix), $(cfsketch_g._008_System__openrc_service), $(cfsketch_g._008_System__openrc_runlevel));
+    _009_System__set_hostname_activated::
+      "009 System::set_hostname 1" usebundle => cfdc_hostname:set($(cfsketch_g._009_System__set_hostname_canon_prefix), $(cfsketch_g._009_System__set_hostname_hostname), $(cfsketch_g._009_System__set_hostname_domainname));
     _003_System__openrc_activated::
-      "003 System::openrc 2" usebundle => cfdc_openrc:entry($(cfsketch_g._003_System__openrc_prefix), $(cfsketch_g._003_System__openrc_class_prefix), $(cfsketch_g._003_System__openrc_service), $(cfsketch_g._003_System__openrc_runlevel));
+      "003 System::openrc 1" usebundle => cfdc_openrc:entry($(cfsketch_g._003_System__openrc_prefix), $(cfsketch_g._003_System__openrc_class_prefix), $(cfsketch_g._003_System__openrc_service), $(cfsketch_g._003_System__openrc_runlevel));
     _006_System__openrc_activated::
-      "006 System::openrc 5" usebundle => cfdc_openrc:entry($(cfsketch_g._006_System__openrc_prefix), $(cfsketch_g._006_System__openrc_class_prefix), $(cfsketch_g._006_System__openrc_service), $(cfsketch_g._006_System__openrc_runlevel));
+      "006 System::openrc 4" usebundle => cfdc_openrc:entry($(cfsketch_g._006_System__openrc_prefix), $(cfsketch_g._006_System__openrc_class_prefix), $(cfsketch_g._006_System__openrc_service), $(cfsketch_g._006_System__openrc_runlevel));
     _007_System__openrc_activated::
-      "007 System::openrc 6" usebundle => cfdc_openrc:entry($(cfsketch_g._007_System__openrc_prefix), $(cfsketch_g._007_System__openrc_class_prefix), $(cfsketch_g._007_System__openrc_service), $(cfsketch_g._007_System__openrc_runlevel));
+      "007 System::openrc 5" usebundle => cfdc_openrc:entry($(cfsketch_g._007_System__openrc_prefix), $(cfsketch_g._007_System__openrc_class_prefix), $(cfsketch_g._007_System__openrc_service), $(cfsketch_g._007_System__openrc_runlevel));
     _014_VCS__vcs_mirror_activated::
-      "014 VCS::vcs_mirror 5" usebundle => cfdc_vcs:mirror($(cfsketch_g._014_VCS__vcs_mirror_prefix), $(cfsketch_g._014_VCS__vcs_mirror_class_prefix), $(cfsketch_g._014_VCS__vcs_mirror_vcs), $(cfsketch_g._014_VCS__vcs_mirror_path), $(cfsketch_g._014_VCS__vcs_mirror_origin), $(cfsketch_g._014_VCS__vcs_mirror_branch), $(cfsketch_g._014_VCS__vcs_mirror_runas), $(cfsketch_g._014_VCS__vcs_mirror_umask));
+      "014 VCS::vcs_mirror 4" usebundle => cfdc_vcs:mirror($(cfsketch_g._014_VCS__vcs_mirror_prefix), $(cfsketch_g._014_VCS__vcs_mirror_class_prefix), $(cfsketch_g._014_VCS__vcs_mirror_vcs), $(cfsketch_g._014_VCS__vcs_mirror_path), $(cfsketch_g._014_VCS__vcs_mirror_origin), $(cfsketch_g._014_VCS__vcs_mirror_branch), $(cfsketch_g._014_VCS__vcs_mirror_runas), $(cfsketch_g._014_VCS__vcs_mirror_umask));
     _015_VCS__vcs_mirror_activated::
-      "015 VCS::vcs_mirror 6" usebundle => cfdc_vcs:mirror($(cfsketch_g._015_VCS__vcs_mirror_prefix), $(cfsketch_g._015_VCS__vcs_mirror_class_prefix), $(cfsketch_g._015_VCS__vcs_mirror_vcs), $(cfsketch_g._015_VCS__vcs_mirror_path), $(cfsketch_g._015_VCS__vcs_mirror_origin), $(cfsketch_g._015_VCS__vcs_mirror_branch), $(cfsketch_g._015_VCS__vcs_mirror_runas), $(cfsketch_g._015_VCS__vcs_mirror_umask));
-    _001_System__etc_hosts_activated::
-      "001 System::etc_hosts 1" usebundle => cfdc_etc_hosts:configure($(cfsketch_g._001_System__etc_hosts_class_prefix), $(cfsketch_g._001_System__etc_hosts_hostfile), "default:cfsketch_g._001_System__etc_hosts_hosts");
+      "015 VCS::vcs_mirror 5" usebundle => cfdc_vcs:mirror($(cfsketch_g._015_VCS__vcs_mirror_prefix), $(cfsketch_g._015_VCS__vcs_mirror_class_prefix), $(cfsketch_g._015_VCS__vcs_mirror_vcs), $(cfsketch_g._015_VCS__vcs_mirror_path), $(cfsketch_g._015_VCS__vcs_mirror_origin), $(cfsketch_g._015_VCS__vcs_mirror_branch), $(cfsketch_g._015_VCS__vcs_mirror_runas), $(cfsketch_g._015_VCS__vcs_mirror_umask));
+    _001_Packages__Generic__add_activated::
+      "001 Packages::Generic::add 1" usebundle => cfdc_add_package:entry($(cfsketch_g._001_Packages__Generic__add_prefix), $(cfsketch_g._001_Packages__Generic__add_class_prefix), @(cfsketch_g._001_Packages__Generic__add_packages));
     _012_VCS__vcs_mirror_activated::
-      "012 VCS::vcs_mirror 3" usebundle => cfdc_vcs:mirror($(cfsketch_g._012_VCS__vcs_mirror_prefix), $(cfsketch_g._012_VCS__vcs_mirror_class_prefix), $(cfsketch_g._012_VCS__vcs_mirror_vcs), $(cfsketch_g._012_VCS__vcs_mirror_path), $(cfsketch_g._012_VCS__vcs_mirror_origin), $(cfsketch_g._012_VCS__vcs_mirror_branch), $(cfsketch_g._012_VCS__vcs_mirror_runas), $(cfsketch_g._012_VCS__vcs_mirror_umask));
+      "012 VCS::vcs_mirror 2" usebundle => cfdc_vcs:mirror($(cfsketch_g._012_VCS__vcs_mirror_prefix), $(cfsketch_g._012_VCS__vcs_mirror_class_prefix), $(cfsketch_g._012_VCS__vcs_mirror_vcs), $(cfsketch_g._012_VCS__vcs_mirror_path), $(cfsketch_g._012_VCS__vcs_mirror_origin), $(cfsketch_g._012_VCS__vcs_mirror_branch), $(cfsketch_g._012_VCS__vcs_mirror_runas), $(cfsketch_g._012_VCS__vcs_mirror_umask));
 
 }

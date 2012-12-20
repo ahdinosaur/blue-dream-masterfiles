@@ -15,9 +15,6 @@
        # contexts for activation 002
       "_002_System__etc_hosts_activated" expression => "any";
       "_002_System__etc_hosts_defined_only" expression => "any";
-       # contexts for activation 016
-      "_016_VCS__vcs_mirror_activated" expression => "any";
-      "_016_VCS__vcs_mirror_nowipe" expression => "any";
        # contexts for activation 010
       "_010_System__tzconfig_activated" expression => "any";
        # contexts for activation 004
@@ -95,28 +92,6 @@
        "_002_System__etc_hosts_sketch_version" string => "2.1";
        "_002_System__etc_hosts_sketch_name" string => "System::etc_hosts";
        "_002_System__etc_hosts_sketch_license" string => "MIT";
-       # string and slist variables for activation 016
-     any::
-       "_016_VCS__vcs_mirror_prefix" string => "cfsketch_g._016_VCS__vcs_mirror_";
-       "_016_VCS__vcs_mirror_class_prefix" string => "default:_016_VCS__vcs_mirror_";
-       "_016_VCS__vcs_mirror_vcs" string => "/usr/bin/git";
-       "_016_VCS__vcs_mirror_path" string => "/var/cfengine/masterfiles";
-       "_016_VCS__vcs_mirror_origin" string => "https://github.com/ahdinosaur/blue-dream-masterfiles.git";
-       "_016_VCS__vcs_mirror_branch" string => "master";
-       "_016_VCS__vcs_mirror_runas" string => "root";
-       "_016_VCS__vcs_mirror_umask" string => "022";
-       "_016_VCS__vcs_mirror_contexts[activated]" string => "any"; # text representation of the context "activated"
-       "_016_VCS__vcs_mirror_contexts[nowipe]" string => "any"; # text representation of the context "nowipe"
-       "_016_VCS__vcs_mirror_sketch_depends" slist => { "CFEngine::stdlib" };
-       "_016_VCS__vcs_mirror_sketch_authors" slist => { "Nick Anderson <nick@cmdln.org>", "Ted Zlatanov <tzz@lifelogs.com>" };
-       "_016_VCS__vcs_mirror_sketch_tags" slist => { "cfdc" };
-       "_016_VCS__vcs_mirror_sketch_manifest" slist => { "README.md", "main.cf", "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
-       "_016_VCS__vcs_mirror_sketch_manifest_cf" slist => { "main.cf" };
-       "_016_VCS__vcs_mirror_sketch_manifest_docs" slist => { "README.md" };
-       "_016_VCS__vcs_mirror_sketch_manifest_extra" slist => { "params/cfengine-copbl.json", "params/cfengine-core-runas-tzz.json", "params/cfengine-core.json", "params/thrift-lib-perl.json" };
-       "_016_VCS__vcs_mirror_sketch_version" string => "1.11";
-       "_016_VCS__vcs_mirror_sketch_name" string => "VCS::vcs_mirror";
-       "_016_VCS__vcs_mirror_sketch_license" string => "MIT";
        # string and slist variables for activation 010
      any::
        "_010_System__tzconfig_canon_prefix" string => "_010_System__tzconfig_";
@@ -331,7 +306,7 @@
        "_001_Packages__Generic__add_sketch_manifest_cf" slist => { "main.cf" };
        "_001_Packages__Generic__add_sketch_manifest_docs" slist => { "README.md" };
        "_001_Packages__Generic__add_sketch_manifest_extra" slist => { "params/demo.json" };
-       "_001_Packages__Generic__add_sketch_version" string => "0.01";
+       "_001_Packages__Generic__add_sketch_version" string => "1";
        "_001_Packages__Generic__add_sketch_name" string => "Packages::Generic::add";
        "_001_Packages__Generic__add_sketch_license" string => "MIT";
        # string and slist variables for activation 012
@@ -367,8 +342,6 @@ bundle agent cfsketch_run
       "011 VCS::vcs_mirror 1" usebundle => cfdc_vcs:mirror($(cfsketch_g._011_VCS__vcs_mirror_prefix), $(cfsketch_g._011_VCS__vcs_mirror_class_prefix), $(cfsketch_g._011_VCS__vcs_mirror_vcs), $(cfsketch_g._011_VCS__vcs_mirror_path), $(cfsketch_g._011_VCS__vcs_mirror_origin), $(cfsketch_g._011_VCS__vcs_mirror_branch), $(cfsketch_g._011_VCS__vcs_mirror_runas), $(cfsketch_g._011_VCS__vcs_mirror_umask));
     _002_System__etc_hosts_activated::
       "002 System::etc_hosts 1" usebundle => cfdc_etc_hosts:configure($(cfsketch_g._002_System__etc_hosts_class_prefix), $(cfsketch_g._002_System__etc_hosts_hostfile), "default:cfsketch_g._002_System__etc_hosts_hosts");
-    _016_VCS__vcs_mirror_activated::
-      "016 VCS::vcs_mirror 6" usebundle => cfdc_vcs:mirror($(cfsketch_g._016_VCS__vcs_mirror_prefix), $(cfsketch_g._016_VCS__vcs_mirror_class_prefix), $(cfsketch_g._016_VCS__vcs_mirror_vcs), $(cfsketch_g._016_VCS__vcs_mirror_path), $(cfsketch_g._016_VCS__vcs_mirror_origin), $(cfsketch_g._016_VCS__vcs_mirror_branch), $(cfsketch_g._016_VCS__vcs_mirror_runas), $(cfsketch_g._016_VCS__vcs_mirror_umask));
     _010_System__tzconfig_activated::
       "010 System::tzconfig 1" usebundle => cfdc_tzconfig:set($(cfsketch_g._010_System__tzconfig_canon_prefix), $(cfsketch_g._010_System__tzconfig_timezone), $(cfsketch_g._010_System__tzconfig_zoneinfo), $(cfsketch_g._010_System__tzconfig_relocate));
     _004_System__openrc_activated::
