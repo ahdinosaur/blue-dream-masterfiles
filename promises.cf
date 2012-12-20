@@ -35,11 +35,12 @@ body common control
             "controls/cf_serverd.cf",
 
          # COPBL/Custom libraries
-            "libraries/cfengine_stdlib.cf",
+            #"libraries/cfengine_stdlib.cf",
 
          # Design Center
              # MARKER FOR CF-SKETCH INPUT INSERTION
              "cf-sketch-runfile.cf",
+	     "@(cfsketch_g.inputs)",
 
          # User services from here
             "services/init_msg.cf",
