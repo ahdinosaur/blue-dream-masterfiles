@@ -35,7 +35,7 @@ bundle agent set(canon_prefix, timezone, zoneinfo, relocate)
       create        => "true",
       edit_line     => default:insert_lines("$(timezone)"),
       perms         => cfdc_tzconfig:test_aware_mog("644", "root", "root"),
-      comment       => "Debian based systems also use the /etc/timezone file";
+      comment       => "Debian and Gentoo based systems also use the /etc/timezone file";
 
     timezone_exists.(redhat|centos)::
       "$(relocate)/etc/sysconfig/clock"
