@@ -1,8 +1,0 @@
-{
-    "System::openrc":
-    {
-        "activated" : true,
-        "service": "syslog",
-        "runlevel": "default",
-    }
-}

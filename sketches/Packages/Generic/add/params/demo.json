@@ -1,7 +1,0 @@
-{
-    "Packages::Generic::add":
-    {
-        "activated" : true,
-	"packages" : ["htop"],
-    }
-}

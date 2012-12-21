@@ -1,0 +1,35 @@
+# Cfengine code snippet by Valentin Hoebel (valentin@xenuser.org)
+# Created on August 7th 2012; Configure sshd
+# You are free to use and share this code snippet in any way you want.
+
+
+bundle agent configure_services {
+  vars:
+	#Which config file shall be configured?
+	"files[sshd]" string => "/etc/ssh/sshd_config";
+
+	#SSHd variables to be set
+	"sshd[PasswordAuthentication]"	string => "yes";
+	"sshd[UsePAM]"			string => "yes";
+
+
+  methods:
+	"sshd" usebundle	=> edit_service("sshd"),
+	comment 		=> "Configure $(files[sshd])";
+}
+
+bundle agent edit_service(service) {
+  files:
+	"$(configure_services.files[sshd])"
+	handle		=> "edit_service",
+	comment		=> "Ensure sshd is configured correctly",
+	create		=> "true",
+	edit_line	=> set_config_values("configure_services.$(service)"),
+	classes		=> if_repaired("$(service)_restart_required");
+
+  commands:
+	sshd_restart_required::
+	  "/etc/init.d/ssh restart"
+		handle	=> "restart_sshd",
+		comment	=> "Restart SSHd for configuration changes";
+}
