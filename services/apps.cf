@@ -14,7 +14,7 @@ bundle agent configure_apps {
         "modules[modules]"	string => "nvidia";
 
   methods:
-	"sshd" usebundle	=> edit_service_config_values("sshd");
+	"sshd" usebundle	=> edit_sshd;
 	"modules" usebundle	=> edit_service_variable_values("modules");
 }
 
@@ -27,11 +27,6 @@ bundle agent edit_service_config_values(service) {
 	edit_line	=> set_config_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
 
-  commands:
-	sshd_restart_required::
-	  "/etc/init.d/sshd restart"
-		handle	=> "restart_sshd",
-		comment	=> "restart sshd for configuration changes";
 }
 
 bundle agent edit_service_variable_values(service) {
@@ -42,4 +37,16 @@ bundle agent edit_service_variable_values(service) {
 	create		=> "true",
 	edit_line	=> set_variable_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
+}
+
+bundle agent edit_sshd {
+
+  methods:
+        "sshd" usebundle => edit_service_config_values("sshd");
+
+  commands:
+	sshd_restart_required::
+	  "/etc/init.d/sshd restart"
+		handle	=> "restart_sshd",
+		comment	=> "restart sshd for configuration changes";
 }
