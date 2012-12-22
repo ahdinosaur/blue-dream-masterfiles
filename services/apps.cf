@@ -38,6 +38,7 @@ bundle agent configure_apps {
 	"sshd" usebundle => edit_sshd;
 	"modules" usebundle => edit_service_variable_values("modules");
 	"xdm" usebundle => edit_service_variable_values("xdm");
+	"portage" usebundle => edit_service_variable_values("portage");
 }
 
 bundle agent edit_service_config_values(service) {
