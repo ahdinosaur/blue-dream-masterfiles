@@ -51,7 +51,7 @@ dinolay:my_profiles/mix-ins/nvidia";
 	"modules" usebundle => edit_service_variable_values("modules");
 	"xdm" usebundle => edit_service_variable_values("xdm");
 	"portage_make" usebundle => edit_service_quoted_variable_values("portage");
-        "portage_profile" usebundle => edit_service_file("profile");
+        #"portage_profile" usebundle => edit_service_file("profile");
   
 }
 
