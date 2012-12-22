@@ -1,5 +1,5 @@
 
-bundle agent configure_services {
+bundle agent configure_apps {
   vars:
 	# files to edit
 	"files[sshd]" 		string => "/etc/ssh/sshd_config";
