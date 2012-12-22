@@ -4,6 +4,7 @@ bundle agent configure_apps {
 	# files to edit
 	"files[sshd]" 		string => "/etc/ssh/sshd_config";
 	"files[modules]"	string => "/etc/conf.d/modules";
+	"files[xdm]"		string => "/etc/conf.d/xdm";
 
 	# sshd variables to set
 	"sshd[PasswordAuthentication]"	string => "yes";
@@ -11,11 +12,15 @@ bundle agent configure_apps {
 
 	# kernel modules to set
     blue_dream::
-        "modules[modules]"	string => "nvidia";
+        "modules[modules]"	string => "\\\"nvidia\\\"";
+
+	# xdm variables to set
+	"xdm[DISPLAYMANAGER]"	string => "\\\"slim\\\"";
 
   methods:
-	"sshd" usebundle	=> edit_sshd;
-	"modules" usebundle	=> edit_service_variable_values("modules");
+	"sshd" usebundle => edit_sshd;
+	"modules" usebundle => edit_service_variable_values("modules");
+	"xdm" usebundle => edit_service_variable_values("xdm");
 }
 
 bundle agent edit_service_config_values(service) {
