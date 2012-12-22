@@ -24,7 +24,7 @@ bundle agent manage_users
 bundle agent create_users(info)
 {
   vars:
-      "users"	slist => getindices("$(info)");
+      "user"	slist => getindices("$(info)");
 
   classes:
       "add_$(user)" not => userexists("$(user)");
