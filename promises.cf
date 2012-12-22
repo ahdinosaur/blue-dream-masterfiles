@@ -36,6 +36,7 @@ body common control
 
          # COPBL/Custom libraries
             #"libraries/cfengine_stdlib.cf",
+	    "libraries/stdlib.cf",
 
          # Design Center
              # MARKER FOR CF-SKETCH INPUT INSERTION

@@ -18,17 +18,29 @@ bundle agent configure_apps {
 	# xdm variables to set
 	"xdm[DISPLAYMANAGER]"	string => "\"slim\"";
 
-	"portage[CFLAGS]"	string => "\"-O2 -march\=native -pipe\"";
-	"portage[CXXFLAGS]"	string => "\"\${CFLAGS}\"";
-	"portage[CHOST]"	string => "\"x86_64-pc-linux-gnu\"";
-	"portage[MAKEOPTS]"	string => "\"-j5 -l1.95\"";
-	"portage[EMERGE_DEFAULT_OPTS]" string => "\"-j4 --load-average 1.85\"";
-	"portage[VIDEO_CARDS]" string => "\"nvidia\"";
-	"portage[ACCEPT_KEYWORDS]" string => "\"amd64\"";
-	"portage[FEATURES]" string => "\"ccache\"";
-	"portage[CCACHE_DIR]" string => "\"/var/ccache\"";
-	"portage[CCACHE_SIZE]" string => "\"4G\"";
-	"portage[PORTAGE_NICENESS]" string => "\"15\"";
+	"portage[CFLAGS]"	string => "-O2 -march=native -pipe";
+	"portage[CXXFLAGS]"	string => "${CFLAGS}";
+	"portage[CHOST]"	string => "x86_64-pc-linux-gnu";
+	"portage[MAKEOPTS]"	string => "-j5 -l1.95";
+	"portage[EMERGE_DEFAULT_OPTS]" string => "-j4 --load-average 1.85";
+	"portage[VIDEO_CARDS]" string => "nvidia";
+	"portage[ACCEPT_KEYWORDS]" string => "amd64";
+	"portage[FEATURES]" string => "ccache";
+	"portage[CCACHE_DIR]" string => "/var/ccache";
+	"portage[CCACHE_SIZE]" string => "4G";
+	"portage[PORTAGE_NICENESS]" string => "15";
+
+	"profile" string => "gentoo:funtoo/1.0/linux-gnu/arch/x86-64bit
+gentoo:funtoo/1.0/linux-gnu/build/stable
+gentoo:funtoo/1.0/linux-gnu/flavor/desktop
+gentoo:funtoo/1.0/linux-gnu/mix-ins/xfce
+dinolay:my_profiles/mix-ins/login
+dinolay:my_profiles/mix-ins/disk
+dinolay:my_profiles/mix-ins/awesome
+dinolay:my_profiles/mix-ins/dev
+dinolay:my_profiles/mix-ins/easy
+dinolay:my_profiles/mix-ins/xfce
+dinolay:my_profiles/mix-ins/nvidia";
 
     any::
 	"portage[INPUT_DEVICES]" string => "\"evdev keyboard mouse\"";
@@ -38,7 +50,9 @@ bundle agent configure_apps {
 	"sshd" usebundle => edit_sshd;
 	"modules" usebundle => edit_service_variable_values("modules");
 	"xdm" usebundle => edit_service_variable_values("xdm");
-	"portage" usebundle => edit_service_variable_values("portage");
+	"portage_make" usebundle => edit_service_quoted_variable_values("portage");
+        "portage_profile" usebundle => edit_service_file("profile");
+  
 }
 
 bundle agent edit_service_config_values(service) {
@@ -56,9 +70,19 @@ bundle agent edit_service_variable_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
 	handle		=> "edit_service",
-	comment		=> "ensure sshd is configured correctly",
+	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_variable_values("configure_apps.$(service)"),
+	classes		=> if_repaired("$(service)_restart_required");
+}
+
+bundle agent edit_service_quoted_variable_values(service) {
+  files:
+	"$(configure_apps.files[$(service)])"
+	handle		=> "edit_service",
+	comment		=> "ensure $(service) is configured correctly",
+	create		=> "true",
+	edit_line	=> set_quoted_variable_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
 }
 
