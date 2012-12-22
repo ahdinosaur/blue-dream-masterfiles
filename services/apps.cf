@@ -12,10 +12,10 @@ bundle agent configure_apps {
 
 	# kernel modules to set
     blue_dream::
-        "modules[modules]"	string => "\\\"nvidia\\\"";
+        "modules[modules]"	string => "\"nvidia\"";
 
 	# xdm variables to set
-	"xdm[DISPLAYMANAGER]"	string => "\\\"slim\\\"";
+	"xdm[DISPLAYMANAGER]"	string => "\"slim\"";
 
   methods:
 	"sshd" usebundle => edit_sshd;
