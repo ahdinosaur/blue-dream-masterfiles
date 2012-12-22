@@ -10,7 +10,7 @@ bundle agent configure_services {
 	"sshd[UsePAM]"			string => "yes";
 
 	# kernel modules to set
-    blue-dream::
+    blue_dream::
         "modules[modules]"	string => "nvidia";
 
   methods:
