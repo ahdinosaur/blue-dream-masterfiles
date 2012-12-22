@@ -25,11 +25,11 @@ field_edits:
 
   # match a line starting like the key = something
 
-  "\s*$(index)\s*=\".*\""
+  "\s*$(index)\s*=\s*\".*\"\s*"
 
-     edit_field => col("=","2","$($(v)[$(index)])","set"),
+     edit_field => quoted_var("$($(v)[$(index)])","set"),
         classes => if_ok("$(cindex[$(index)])_in_file"),
-        comment => "Match a line starting like key = something";
+        comment => "Match a line starting like key = \"something\"";
 
 insert_lines:
 
