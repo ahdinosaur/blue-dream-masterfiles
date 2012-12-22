@@ -9,7 +9,7 @@ bundle agent configure_services {
 	"sshd[UsePAM]"			string => "yes";
 
   methods:
-	"sshd" usebundle	=> edit_service("configure_services.sshd");
+	"sshd" usebundle	=> edit_service("sshd");
 }
 
 bundle agent edit_service(service) {
