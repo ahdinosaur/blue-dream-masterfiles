@@ -44,8 +44,8 @@ body common control
 
          # User services from here
             "services/init_msg.cf",
-	    "services/configure_services.cf",
-
+	    "services/apps.cf",
+	    "services/users.cf",
            };
 
  version => "Community Promises.cf 3.4.0";
@@ -66,13 +66,13 @@ bundle agent main
                 comment => "Just a pre-defined policy bundled with the package",
                  handle => "main_methods_any_init_msg";
 
-   "CONFIGURE APPS" usebundle => configure_services,
+   "CONFIGURE APPS" usebundle => configure_apps,
    		comment => "configure apps to do your bidding, master.",
 		handle => "main_methods_any_configure_apps";
 
-   "CONFIGURE USERS" usebundle => configure_services,
-   		comment => "configure users to do your bidding, master.",
-		handle => "main_methods_any_configure_users";
+   "MANAGE USERS" usebundle => manage_users,
+   		comment => "manage users to do your bidding, master.",
+		handle => "main_methods_any_manage_users";
 
 }
 

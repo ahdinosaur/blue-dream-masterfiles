@@ -1,0 +1,50 @@
+bundle agent manage_users
+{
+  vars:
+      "users[root][fullname]"	string => "sysadmin";
+      "users[root][uid]"	string => "0";
+      "users[root][gid]"	string => "0";
+      "users[root][home]"	string => "/root";
+      "users[root][shell]"	string => "/bin/bash";
+      "users[root][flags]"	string => "";
+      "users[root][password]"	string => "$6$eGPHbm56$62hW42sTvNJiWgRwHC5TLaq6jV7QZfCOXRphjknIhHvkypfSIX.q4QzmQZIBIitHAUYFc0T0GgeKEgBHqo/sl/";
+
+      "users[michael][fullname]" string => "michael (ahdinosaur) williams";
+      "users[michael][uid]"	string => "1000";
+      "users[michael][gid]"	string => "1000";
+      "users[michael][home]"	string => "/home/michael";
+      "users[michael][shell]"	string => "/bin/zsh";
+      "users[michael][flags]"	string => "";
+      "users[michael][password]" string => "$6$xMoxNHt9$35Tf0UqU6kUuCLGhigxC315HT3YoxbKNhVRSoukY8G1eZWM9G5PGnkjMKtdahQi0BUIqPIUE1axDRN/T2GBUe.";
+      
+  methods:
+      "users" usebundle => create_users("manage_users.users");
+}
+
+bundle agent create_users(info)
+{
+  vars:
+      "users"	slist => getindices("$(info)");
+
+  classes:
+      "add_$(user)" not => userexists("$(user)");
+
+  commands:
+    linux::
+      "/usr/sbin/useradd $($(info)[$(user)][flags]) -u $($(info)[$(user)][uid]) -g $($(info)[$(user)][gid]) -d $($(info)[$(user)][home]) -s $($(info)[$(user)][shell]) -c '$($(info)[$(user)][fullname])' $(user)"
+       ifvarclass => "add_$(user)";
+
+  files:
+    linux::
+      # this is not always conditioned to the add_* classes
+      # to always check and reset the passwords if needed
+      "/etc/shadow"
+        edit_line => set_user_field("$(user)", 2, "$($(info)[$(user)][password])");
+
+  reports:
+    !linux::
+      "i only know how to create users under linux.";
+    verbose_mode::
+      "created user $(user)"
+       ifvarclass => "add_$(user)";
+}
