@@ -20,11 +20,11 @@ bundle agent configure_apps {
 
 bundle agent edit_service_config_values(service) {
   files:
-	"$(configure_services.files[$(service)])"
+	"$(configure_apps.files[$(service)])"
 	handle		=> "edit_service",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
-	edit_line	=> set_config_values("configure_services.$(service)"),
+	edit_line	=> set_config_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
 
   commands:
@@ -36,10 +36,10 @@ bundle agent edit_service_config_values(service) {
 
 bundle agent edit_service_variable_values(service) {
   files:
-	"$(configure_services.files[$(service)])"
+	"$(configure_apps.files[$(service)])"
 	handle		=> "edit_service",
 	comment		=> "ensure sshd is configured correctly",
 	create		=> "true",
-	edit_line	=> set_variable_values("configure_services.$(service)"),
+	edit_line	=> set_variable_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
 }
