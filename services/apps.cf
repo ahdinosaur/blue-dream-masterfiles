@@ -18,11 +18,11 @@ bundle agent configure_apps {
 	# xdm variables to set
 	"xdm[DISPLAYMANAGER]"	string => "\"slim\"";
 
-	"portage[CFLAGS]"	string => "\"-O2 -march=corei7-avx -pipe\"";
+	"portage[CFLAGS]"	string => "\"-O2 -march\=native -pipe\"";
 	"portage[CXXFLAGS]"	string => "\"\${CFLAGS}\"";
 	"portage[CHOST]"	string => "\"x86_64-pc-linux-gnu\"";
 	"portage[MAKEOPTS]"	string => "\"-j5 -l1.95\"";
-	"portage[EMERGE_DEFAULT_OPTS]" string => "\"-j4 --load-average=1.85\"";
+	"portage[EMERGE_DEFAULT_OPTS]" string => "\"-j4 --load-average 1.85\"";
 	"portage[VIDEO_CARDS]" string => "\"nvidia\"";
 	"portage[ACCEPT_KEYWORDS]" string => "\"amd64\"";
 	"portage[FEATURES]" string => "\"ccache\"";
