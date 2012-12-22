@@ -19,7 +19,7 @@ bundle agent configure_apps {
 	"xdm[DISPLAYMANAGER]"	string => "\"slim\"";
 
 	"portage[CFLAGS]"	string => "\"-O2 -march=corei7-avx -pipe\"";
-	"portage[CXXFLAGS]"	string => "\"${CFLAGS}\"";
+	"portage[CXXFLAGS]"	string => "\"\${CFLAGS}\"";
 	"portage[CHOST]"	string => "\"x86_64-pc-linux-gnu\"";
 	"portage[MAKEOPTS]"	string => "\"-j5 -l1.95\"";
 	"portage[EMERGE_DEFAULT_OPTS]" string => "\"-j4 --load-average=1.85\"";
@@ -32,7 +32,7 @@ bundle agent configure_apps {
 
     any::
 	"portage[INPUT_DEVICES]" string => "\"evdev keyboard mouse\"";
-	"portage[PORTDIR_OVERLAY]" string => "\"/usr/local/portage\"";
+	"portage[PORTDIR_OVERLAY]" string => "\"/usr/local/portage/\"";
 
   methods:
 	"sshd" usebundle => edit_sshd;
