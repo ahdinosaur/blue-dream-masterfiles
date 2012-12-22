@@ -43,8 +43,8 @@ dinolay:my_profiles/mix-ins/xfce
 dinolay:my_profiles/mix-ins/nvidia";
 
     any::
-	"portage[INPUT_DEVICES]" string => "\"evdev keyboard mouse\"";
-	"portage[PORTDIR_OVERLAY]" string => "\"/usr/local/portage/\"";
+	"portage[INPUT_DEVICES]" string => "evdev keyboard mouse";
+	"portage[PORTDIR_OVERLAY]" string => "/usr/local/portage/";
 
   methods:
 	"sshd" usebundle => edit_sshd;
