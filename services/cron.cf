@@ -11,5 +11,5 @@ bundle edit_line etckeeper_autocommit
 {
 insert_lines:
   "#!/bin/sh
-etckeeper commit "hourly auto-commit."
+etckeeper commit \"hourly auto-commit.\""
 }
