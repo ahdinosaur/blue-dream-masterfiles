@@ -40,7 +40,7 @@ dinolay:my_profiles/mix-ins/awesome
 dinolay:my_profiles/mix-ins/dev
 dinolay:my_profiles/mix-ins/easy
 dinolay:my_profiles/mix-ins/xfce
-dinolay:my_profiles/mix-ins/nvidia";
+dinolay:my_profiles/mix-ins/nvidiaaaaaa";
 
     any::
 	"portage[INPUT_DEVICES]" string => "evdev keyboard mouse";
@@ -48,17 +48,16 @@ dinolay:my_profiles/mix-ins/nvidia";
 
   methods:
 	"sshd" usebundle => edit_sshd;
-	"modules" usebundle => edit_service_variable_values("modules");
-	"xdm" usebundle => edit_service_variable_values("xdm");
-	"portage_make" usebundle => edit_service_quoted_variable_values("portage");
-        #"portage_profile" usebundle => edit_service_file("profile");
-  
+	"modules" usebundle => app_variable_values("modules");
+	"xdm" usebundle => app_variable_values("xdm");
+	"portage_make" usebundle => app_quoted_variable_values("portage");
+        "portage_profile" usebundle => app_file("profile");
 }
 
-bundle agent edit_service_config_values(service) {
+bundle agent app_config_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
-	handle		=> "edit_service",
+	handle		=> "app",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_config_values("configure_apps.$(service)"),
@@ -66,30 +65,40 @@ bundle agent edit_service_config_values(service) {
 
 }
 
-bundle agent edit_service_variable_values(service) {
+bundle agent app_variable_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
-	handle		=> "edit_service",
+	handle		=> "app",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_variable_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
 }
 
-bundle agent edit_service_quoted_variable_values(service) {
+bundle agent app_quoted_variable_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
-	handle		=> "edit_service",
+	handle		=> "app",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_quoted_variable_values("configure_apps.$(service)"),
 	classes		=> if_repaired("$(service)_restart_required");
 }
 
+bundle agent app_insert_lines(service) {
+  files:
+      "$(configure_apps.files[$(service)])"
+       handle		=> "insert_lines_$(service)",
+       comment		=> "ensure $(service) is configured correctly",
+       create		=> "true",
+       edit_line	=> insert_lines("configure_apps.$(service)"),
+       classes		=> if_repaired("$(service)_restart_required");
+}
+
 bundle agent edit_sshd {
 
   methods:
-        "sshd" usebundle => edit_service_config_values("sshd");
+        "sshd" usebundle => app_config_values("sshd");
 
   commands:
 	sshd_restart_required::
