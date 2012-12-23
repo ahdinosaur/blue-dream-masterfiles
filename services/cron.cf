@@ -1,9 +1,14 @@
 bundle agent set_cron
 {
   files:
-    "/etc/cron.d/hourly/etckeeper-autocommit"
+    "/etc/cron.hourly/etckeeper-autocommit"
      edit_line => etckeeper_autocommit,
-     perms => mog("1777", "root", "wheel"),
+     perms => mog("1744", "root", "wheel"),
+     create => "true";
+
+    "/etc/cron.hourly/mr-autoupdate"
+     edit_line => etckeeper_autocommit,
+     perms => mog("1744", "root", "wheel"),
      create => "true";
 }
 
@@ -12,4 +17,11 @@ bundle edit_line etckeeper_autocommit
   insert_lines:
       "#!/bin/sh
 etckeeper commit \"hourly auto-commit.\"";
+}
+
+bundle edit_line mr_autoupdate
+{
+  insert_lines:
+      "#!/bin/sh
+mr -d / update";
 }
