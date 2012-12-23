@@ -22,7 +22,7 @@ bundle agent add_packages
 	"net-misc/dhcpcd",
 	# boot
 	"sys-boot/grub"
-       }
+       };
 
       "fun_packages" slist =>
       {
@@ -61,7 +61,8 @@ bundle agent add_packages
 	"dev-vcs/gitflow",
 	"mail-client/mutt",
 	"net-irc/irssi"
-        }
+        };
+
   packages:
     any::
       "$(base_packages)"
