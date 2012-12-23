@@ -12,5 +12,5 @@ bundle agent set_runlevels
       "runlevels[xdm]" string => "default";
 
   commands:
-      "rc-update add $(runlevels[service]) $(runlevels[default])";
+      "/sbin/rc-update add $(runlevels[service]) $(runlevels[default])";
 }
