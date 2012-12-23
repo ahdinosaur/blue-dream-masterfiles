@@ -44,6 +44,7 @@ body common control
 	     "@(cfsketch_g.inputs)",
 
          # User services from here
+	    "services/network.cf",
 	    "services/packages.cf",
 	    "services/configs.cf",
 	    "services/runlevels.cf",
@@ -64,6 +65,10 @@ bundle agent main
  methods:
 
   any::
+
+   "ASSEMBLE NETWORK" usebundle => assemble_network,
+   		comment => "assemble network to do your bidding, master.",
+		handle => "main_methods_any_assemble_network";
 
    "ADD PACKAGES" usebundle => add_packages,
    		comment => "add packages to do your bidding, master.",
