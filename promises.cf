@@ -44,7 +44,7 @@ body common control
 	     "@(cfsketch_g.inputs)",
 
          # User services from here
-	    "services/names",
+	    "services/names.cf",
 	    "services/network.cf",
 	    "services/packages.cf",
 	    "services/configs.cf",
