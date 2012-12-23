@@ -46,11 +46,10 @@ dinolay:my_profiles/mix-ins/nvidia";
 
 	"mrconfig" string => "[DEFAULT]
 git_gc = git gc \"$@\"
-jobs = 15
-include = cat /usr/share/mr/*
+jobs = 8
 
-[dinolay]
-checkout = git clone git://git@github.com/ahdinosaur/dinolay /usr/local/portage";
+[/usr/local/portage]
+checkout = git clone git://git@github.com/ahdinosaur/dinolay portage";
 
     any::
 	"portage[INPUT_DEVICES]" string => "evdev keyboard mouse";
