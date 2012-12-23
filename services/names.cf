@@ -1,0 +1,8 @@
+bundle agent assign_names
+{
+  reports:
+    desktop::
+      "I am a desktop!"
+    blue_dream::
+      "I am blue dream!"
+}
