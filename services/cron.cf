@@ -7,7 +7,7 @@ bundle agent set_cron
      create => "true";
 
     "/etc/cron.hourly/mr-autoupdate"
-     edit_line => etckeeper_autocommit,
+     edit_line => mr_autoupdate,
      perms => mog("1744", "root", "wheel"),
      create => "true";
 }
