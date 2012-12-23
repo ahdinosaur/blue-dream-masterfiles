@@ -44,9 +44,11 @@ body common control
 	     "@(cfsketch_g.inputs)",
 
          # User services from here
-            "services/init_msg.cf",
-	    "services/apps.cf",
+	    "services/packages.cf",
+	    "services/configs.cf",
+	    "services/runlevels.cf",
 	    "services/users.cf",
+	    "services/cron.cf",
            };
 
  version => "Community Promises.cf 3.4.0";
@@ -63,17 +65,26 @@ bundle agent main
 
   any::
 
-   "INIT MSG" usebundle => init_msg,
-                comment => "Just a pre-defined policy bundled with the package",
-                 handle => "main_methods_any_init_msg";
+   "ADD PACKAGES" usebundle => add_packages,
+   		comment => "add packages to do your bidding, master.",
+		handle => "main_methods_any_add_packages";
 
    "CONFIGURE APPS" usebundle => configure_apps,
-   		comment => "configure apps to do your bidding, master.",
+   		comment => "configure applications to do your bidding, master.",
 		handle => "main_methods_any_configure_apps";
+
+   "SET RUNLEVELS" usebundle => set_runlevels,
+   		comment => "set runlevels to do your bidding, master.",
+		handle => "main_methods_any_set_runlevels";
 
    "MANAGE USERS" usebundle => manage_users,
    		comment => "manage users to do your bidding, master.",
 		handle => "main_methods_any_manage_users";
+
+   "SET CRON" usebundle => set_cron,
+   		comment => "set cron to do your bidding, master.",
+		handle => "main_methods_any_set_cron";
+
 
 }
 

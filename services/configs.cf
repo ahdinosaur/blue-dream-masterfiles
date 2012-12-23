@@ -1,67 +1,6 @@
 
 bundle agent configure_apps {
   vars:
-    gentoo::
-      "base_packages" slist => 
-      {
-        # admin
-        "app-admin/sudo",
-	"app-admin/syslog-ng",
-	"app-editors/vim",
-	"app-misc/mc",
-	"app-misc/tmux",
-	"app-shells/zsh",
-	"dev-vcs/git",
-	"net-analyzer/nmap",
-	"sys-process/htop,
-	# control
-	"net-misc/cfengine",
-	# kernel
-	"sys-kernel/genkernel",
-	# net
-	"net-misc/dhcpcd",
-	# boot
-	"sys-boot/grub"
-       }
-
-      "fun_packages" slist =>
-      {
-        # audio
-	"media-libs/alsa-lib",
-	"media-plugins/gst-plugins-alsa",
-	"media-sound/alsa-headers",
-	"media-sound/alsa-utils",
-	# awesome
-	"media-gfx/feh",
-	"app-emulation/virtualbox",
-	"media-video/vlc",
-	"app-office/libreoffice",
-	"app-text/zathura",
-	"app-text/zathura-pdf-poppler",
-	"www-client/firefox",
-	"www-plugins/adobe-flash",
-	"x11-apps/setxkbmap",
-	"x11-apps/xinit",
-	"x11-base/xorg-server",
-	"x11-misc/slim",
-	"x11-misc/xclip",
-	"x11-terms/rxvt-unicode",
-	"x11-wm/awesome",
-	"xfce-base/thunar",
-	"net-voip/ekiga",
-	# base
-	"net-misc/ntp",
-	"net-misc/openssh",
-	"sys-apps/pciutils",
-	"sys-apps/portage",
-	# dev
-	"dev-perl/Term-ReadLine-Gnu",
-	"dev-lang/lua",
-	"dev-lua/luarocks",
-	"dev-vcs/gitflow",
-	"mail-client/mutt",
-	"net-irc/irssi"
-        }
 
 	# files to edit
 	"files[sshd]" 		string => "/etc/ssh/sshd_config";
@@ -115,16 +54,6 @@ dinolay:my_profiles/mix-ins/nvidiaaaaaa";
 	"xdm" usebundle => app_quoted_variable_values("xdm");
 	"portage_make" usebundle => app_quoted_variable_values("portage");
         "portage_profile" usebundle => app_file("profile");
-
-  packages:
-    any::
-      "$(base_packages)"
-       package_policy => "addupdate",
-       package_method => generic;
-    blue_dream::
-      "$(fun_packages)"
-       package_policy => "addupdate",
-       package_method => generic;
 }
 
 bundle agent app_config_values(service) {
@@ -174,8 +103,8 @@ bundle agent edit_sshd {
         "sshd" usebundle => app_config_values("sshd");
 
   commands:
-	sshd_restart_required::
-	  "/etc/init.d/sshd restart"
-		handle	=> "restart_sshd",
-		comment	=> "restart sshd for configuration changes";
+      "/etc/init.d/sshd restart"
+	handle	=> "restart_sshd",
+	ifvarclass => "$(service)_restart_required",
+	comment	=> "restart sshd for configuration changes";
 }
