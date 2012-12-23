@@ -1,6 +1,6 @@
 bundle agent add_packages
 {
-  vars::
+  vars:
     gentoo::
       "base_packages" slist => 
       {

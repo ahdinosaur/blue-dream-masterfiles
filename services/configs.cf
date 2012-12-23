@@ -59,7 +59,7 @@ dinolay:my_profiles/mix-ins/nvidiaaaaaa";
 bundle agent app_config_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
-	handle		=> "app",
+	handle		=> "app_$(service)_config_values",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_config_values("configure_apps.$(service)"),
@@ -70,7 +70,7 @@ bundle agent app_config_values(service) {
 bundle agent app_variable_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
-	handle		=> "app",
+	handle		=> "app_$(service)_variable_values",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_variable_values("configure_apps.$(service)"),
@@ -80,7 +80,7 @@ bundle agent app_variable_values(service) {
 bundle agent app_quoted_variable_values(service) {
   files:
 	"$(configure_apps.files[$(service)])"
-	handle		=> "app",
+	handle		=> "app_$(service)_quoted_variable_values",
 	comment		=> "ensure $(service) is configured correctly",
 	create		=> "true",
 	edit_line	=> set_quoted_variable_values("configure_apps.$(service)"),
