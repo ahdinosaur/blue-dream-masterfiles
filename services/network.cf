@@ -1,0 +1,20 @@
+bundle agent assemble_network {
+
+  vars:
+      "nodes[blue-dream][ip]" string => "192.168.42.2";
+      "nodes[blue-dream][profile]" slist => { "desktop" };
+
+  methods:
+      "nodes" usebundle => assemble_nodes("assemble_network.network")
+}
+
+bundle agent assemble_nodes(info)
+{
+  vars:
+      "node"	slist => getindices("$(info)");
+      "profiles" slist => "$($(info)[$(node)][profile])";
+
+  classes:
+      "$(profiles)"
+        ifvarclass => classify("$(node)");
+}
