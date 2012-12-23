@@ -1,11 +1,13 @@
 
 bundle agent configure_apps {
   vars:
+    any::
 	# files to edit
 	"files[sshd]" 		string => "/etc/ssh/sshd_config";
 	"files[modules]"	string => "/etc/conf.d/modules";
 	"files[xdm]"		string => "/etc/conf.d/xdm";
 	"files[portage]"	string => "/etc/portage/make.conf";
+	"files[profile]"	string => "/etc/portage/make.profile/parent";
 
 	# sshd variables to set
 	"sshd[PasswordAuthentication]"	string => "yes";
@@ -13,10 +15,10 @@ bundle agent configure_apps {
 
 	# kernel modules to set
     blue_dream::
-        "modules[modules]"	string => "\"nvidia\"";
+        "modules[modules]"	string => "nvidia";
 
 	# xdm variables to set
-	"xdm[DISPLAYMANAGER]"	string => "\"slim\"";
+	"xdm[DISPLAYMANAGER]"	string => "slim";
 
 	"portage[CFLAGS]"	string => "-O2 -march=native -pipe";
 	"portage[CXXFLAGS]"	string => "${CFLAGS}";
@@ -48,8 +50,8 @@ dinolay:my_profiles/mix-ins/nvidiaaaaaa";
 
   methods:
 	"sshd" usebundle => edit_sshd;
-	"modules" usebundle => app_variable_values("modules");
-	"xdm" usebundle => app_variable_values("xdm");
+	"modules" usebundle => app_quoted_variable_values("modules");
+	"xdm" usebundle => app_quoted_variable_values("xdm");
 	"portage_make" usebundle => app_quoted_variable_values("portage");
         "portage_profile" usebundle => app_file("profile");
 }
