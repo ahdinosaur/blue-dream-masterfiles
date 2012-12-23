@@ -49,8 +49,8 @@ git_gc = git gc \"$@\"
 jobs = 15
 include = cat /usr/share/mr/*
 
-[/usr/local/portage]
-checkout = git clone git://git@github.com/ahdinosaur/dinolay portage";
+[dinolay]
+checkout = git clone git://git@github.com/ahdinosaur/dinolay /usr/local/portage";
 
     any::
 	"portage[INPUT_DEVICES]" string => "evdev keyboard mouse";
