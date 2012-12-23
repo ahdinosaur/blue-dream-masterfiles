@@ -45,7 +45,7 @@ dinolay:my_profiles/mix-ins/xfce
 dinolay:my_profiles/mix-ins/nvidia";
 
 	"mrconfig" string => "[DEFAULT]
-git_gc = git gc "$@"
+git_gc = git gc \"$@\"
 jobs = 15
 include = cat /usr/share/mr/*
 
