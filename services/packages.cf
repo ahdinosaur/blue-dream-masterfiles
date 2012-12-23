@@ -21,7 +21,10 @@ bundle agent add_packages
 	# net
 	"net-misc/dhcpcd",
 	# boot
-	"sys-boot/grub"
+	"sys-boot/grub",
+	# configs
+	"dev-dvcs/mr",
+	"sys-apps/etckeeper"
        };
 
       "fun_packages" slist =>

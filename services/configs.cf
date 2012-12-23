@@ -92,7 +92,7 @@ bundle agent app_lines(service) {
      handle		=> "insert_lines_$(service)",
      comment		=> "ensure $(service) is configured correctly",
      create		=> "true",
-     edit_line	=> insert_lines("configure_apps.$(service)"),
+     edit_line	=> insert_lines("$(configure_apps.$(service))"),
      classes		=> if_repaired("$(service)_restart_required");
 }
 
