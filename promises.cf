@@ -44,12 +44,12 @@ body common control
 	     "@(cfsketch_g.inputs)",
 
          # User services from here
-	    "services/network.cf",
 	    "services/packages.cf",
 	    "services/configs.cf",
 	    "services/runlevels.cf",
 	    "services/users.cf",
 	    "services/cron.cf",
+	    "services/network.cf",
            };
 
  version => "Community Promises.cf 3.4.0";

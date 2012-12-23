@@ -42,4 +42,13 @@ bundle common def
                     comment => "Define modules path",
                      handle => "common_def_vars_dir_modules";
 
+      "nodes[blue-dream][ip]" 		string => "192.168.42.2";
+      "nodes[blue-dream][profile]" 	slist => { "desktop" };
+      "node"		slist => getindices("$(info)");
+
+  classes:
+      "$($(nodes)[$(node)][profile])"
+        ifvarclass => "$(node)";
+}
+
 }
