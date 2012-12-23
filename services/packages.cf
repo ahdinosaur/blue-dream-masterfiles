@@ -14,8 +14,10 @@ bundle agent add_packages
 	"dev-vcs/git",
 	"net-analyzer/nmap",
 	"sys-process/htop",
+	"app-text/tree",
 	# control
 	"net-misc/cfengine",
+	"sys-process/vixie-cron",
 	# kernel
 	"sys-kernel/genkernel",
 	# net
