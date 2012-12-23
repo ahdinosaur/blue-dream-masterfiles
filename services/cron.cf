@@ -9,7 +9,7 @@ bundle agent set_cron
 
 bundle edit_line etckeeper_autocommit
 {
-insert_lines:
-  "#!/bin/sh
-etckeeper commit \"hourly auto-commit.\""
+  insert_lines:
+      "#!/bin/sh
+etckeeper commit \"hourly auto-commit.\"";
 }
