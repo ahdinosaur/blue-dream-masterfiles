@@ -11,7 +11,7 @@ bundle agent assemble_network {
 bundle agent assemble_nodes(info)
 {
   vars:
-      "node"	slist => getindices("$(info)");
+      "node"	string => getindices("$(info)");
       "profiles" slist => "$($(info)[$(node)][profile])";
 
   classes:
