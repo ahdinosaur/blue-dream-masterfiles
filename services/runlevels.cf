@@ -1,0 +1,16 @@
+bundle agent set_runlevels
+{
+  vars:
+    any::
+      "runlevels[cf-execd]" string => "default";
+      "runlevels[dhcpcd]" string => "default";
+      "runlevels[sshd]" string => "default";
+      "runlevels[syslog-ng]" string => "default";
+      "runlevels[vixie-cron]" string => "default";
+
+    blue_dream::
+      "runlevels[xdm]" string => "default";
+
+  commands:
+      "rc-update add $(runlevels[service]) $(runlevels[default])";
+}
