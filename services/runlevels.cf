@@ -12,7 +12,7 @@ bundle agent set_runlevels
       "runlevels[xdm]" string => "default";
 
   methods:
-      "runlevels" usebundle => set_runlevel(set_runlevels.runlevels);
+      "runlevels" usebundle => set_runlevel("set_runlevels.runlevels");
 }
 
 bundle agent set_runlevel(info)
