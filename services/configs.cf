@@ -7,7 +7,7 @@ bundle agent configure_apps {
 	"files[xdm]"		string => "/etc/conf.d/xdm";
 	"files[portage]"	string => "/etc/portage/make.conf";
 	"files[profile]"	string => "/etc/portage/make.profile/parent";
-	"files[mrconfig]"	string => "/etc/mrconfig/";
+	"files[mrconfig]"	string => "/etc/mrconfig";
 
 	# sshd variables to set
 	"sshd[PasswordAuthentication]"	string => "yes";
