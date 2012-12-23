@@ -13,7 +13,7 @@ bundle agent add_packages
 	"app-shells/zsh",
 	"dev-vcs/git",
 	"net-analyzer/nmap",
-	"sys-process/htop,
+	"sys-process/htop",
 	# control
 	"net-misc/cfengine",
 	# kernel
