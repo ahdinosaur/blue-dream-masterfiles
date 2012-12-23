@@ -1,4 +1,5 @@
 bundle agent assemble_network
 {
-  
+  vars:
+    "nobody" string => "nobody";
 }
