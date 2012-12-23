@@ -41,7 +41,7 @@ dinolay:my_profiles/mix-ins/awesome
 dinolay:my_profiles/mix-ins/dev
 dinolay:my_profiles/mix-ins/easy
 dinolay:my_profiles/mix-ins/xfce
-dinolay:my_profiles/mix-ins/nvidiaaaaaa";
+dinolay:my_profiles/mix-ins/nvidia";
 
     any::
 	"portage[INPUT_DEVICES]" string => "evdev keyboard mouse";
