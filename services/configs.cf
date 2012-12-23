@@ -1,7 +1,6 @@
 
 bundle agent configure_apps {
   vars:
-
 	# files to edit
 	"files[sshd]" 		string => "/etc/ssh/sshd_config";
 	"files[modules]"	string => "/etc/conf.d/modules";
@@ -53,7 +52,7 @@ dinolay:my_profiles/mix-ins/nvidiaaaaaa";
 	"modules" usebundle => app_quoted_variable_values("modules");
 	"xdm" usebundle => app_quoted_variable_values("xdm");
 	"portage_make" usebundle => app_quoted_variable_values("portage");
-        "portage_profile" usebundle => app_file("profile");
+        "portage_profile" usebundle => app_lines("profile");
 }
 
 bundle agent app_config_values(service) {
@@ -87,14 +86,14 @@ bundle agent app_quoted_variable_values(service) {
 	classes		=> if_repaired("$(service)_restart_required");
 }
 
-bundle agent app_insert_lines(service) {
+bundle agent app_lines(service) {
   files:
-      "$(configure_apps.files[$(service)])"
-       handle		=> "insert_lines_$(service)",
-       comment		=> "ensure $(service) is configured correctly",
-       create		=> "true",
-       edit_line	=> insert_lines("configure_apps.$(service)"),
-       classes		=> if_repaired("$(service)_restart_required");
+    "$(configure_apps.files[$(service)])"
+     handle		=> "insert_lines_$(service)",
+     comment		=> "ensure $(service) is configured correctly",
+     create		=> "true",
+     edit_line	=> insert_lines("configure_apps.$(service)"),
+     classes		=> if_repaired("$(service)_restart_required");
 }
 
 bundle agent edit_sshd {
