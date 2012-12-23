@@ -1,4 +1,4 @@
-bundle agent assemble_network {
+bundle common assemble_network {
 
   vars:
       "nodes[blue-dream][ip]" 		string => "192.168.42.2";

@@ -19,7 +19,7 @@ bundle edit_line etckeeper_autocommit
 if [ ! -d /etc/.git ]; then
   etckeeper init
   cd /etc/
-  git commit -m "init commit."
+  git commit -m \"init commit.\"
   git gc
 else
   etckeeper commit \"hourly auto-commit.\"
