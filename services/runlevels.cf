@@ -11,6 +11,9 @@ bundle agent set_runlevels
     blue_dream::
       "runlevels[xdm]" string => "default";
 
+    any::
+      "runlevel" slist => getindices("$(runlevels)");
+
   commands:
-      "/sbin/rc-update add $(runlevels[service]) $(runlevels[default])";
+      "/sbin/rc-update add $(runlevel) $(runlevels)[$(runlevel)]";
 }
