@@ -42,6 +42,9 @@ dinolay:my_profiles/mix-ins/awesome
 dinolay:my_profiles/mix-ins/dev
 dinolay:my_profiles/mix-ins/easy
 dinolay:my_profiles/mix-ins/xfce
+dinolay:my_profiles/mix-ins/mail
+dinolay:my_profiles/mix-ins/haskell
+dinolay:my_profiles/mix-ins/tex
 dinolay:my_profiles/mix-ins/nvidia";
 
 	"mrconfig" string => "[DEFAULT]
